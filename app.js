@@ -13,9 +13,9 @@ class Year {
 
 class Month {
     #monthIndex;
-    #year;
+    
     constructor(monthIndex) {
-        this.#monthIndex = monthIndex;
+        this.#monthIndex = monthIndex % 12;
         this.days = [];
     }
 
@@ -30,12 +30,15 @@ class Month {
     getNumberOfWeeks() {
         pass
     }
+
+    setNextMonth() {
+        pass
+    }
+
+    setPreviousMonth() {
+        pass
+    }
 }
-
-
-
-
-
 
 
 class Day {
@@ -146,4 +149,4 @@ class Calendar {
 
 
 let calendar = new Calendar();
-console.log(calendar.presentMonth.getMonthIndex());
+console.log(calendar.nextMonth());
