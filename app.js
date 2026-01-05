@@ -111,7 +111,9 @@ class Calendar {
     constructor() {
         this.todayDate = new Date();
         this.presentMonth = new Month(this.todayDate.getMonth());
-        this.presentYear = new Year(this.todayDate.getFullYear())
+        this.nextMonth = (this.presentMonth.getMonthIndex() + 1) % 12;
+        this.previousMonth = this.presentMonth.getMonthIndex() === 0 ? 12 : this.presentMonth.getMonthIndex() - 1;
+        this.presentYear = new Year(this.todayDate.getFullYear());
         this.months_of_the_year = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
         
     }
@@ -124,15 +126,23 @@ class Calendar {
         return this.presentMonth;
     }
 
+    getNextMonth() {
+        return this.nextMonth;
+    }
+
+    getPreviousMonth() {
+        return this.previousMonth;
+    } 
+
     getPresentYear() {
         return this.presentYear;
     }
 
-    nextMonth() {
+    setNextMonth() {
         pass
     }
 
-    previousMonth() {
+    setPreviousMonth() {
         pass
     }   
 
