@@ -65,11 +65,6 @@ class Month {
 
 }
 
-// let mo = new Month(0, 2025)
-
-// for(let i=0 ; i < 24; i++) {
-//     console.log(mo.previousMonth(),mo.getYear())
-// }
 
 class Day {
     #day_number;
