@@ -1,26 +1,58 @@
-class Year {
-    #number
+// class Year {
+//     #number
 
-    constructor(number) {
-        this.#number = number;
-    }
+//     constructor(number) {
+//         this.#number = number;
+//     }
 
-    isLeapYear() {
-        return (this.#number % 4 === 0 && this.#number % 100 !== 0) || (this.#number % 400 === 0);
-    }
-}
+//     isLeapYear() {
+//         return (this.#number % 4 === 0 && this.#number % 100 !== 0) || (this.#number % 400 === 0);
+//     }
+// }
 
 
 class Month {
     #monthIndex;
-    
-    constructor(monthIndex) {
+    #year;
+
+    constructor(monthIndex, year) {
         this.#monthIndex = monthIndex % 12;
+        this.#year = year
         this.days = [];
     }
 
     getMonthIndex() {
         return this.#monthIndex;
+    }
+
+    nextMonth() {
+        let added = this.#monthIndex + 1;
+
+        if(added > 11) {
+            this.#monthIndex = added % 12;
+            this.#year++;
+        }else{
+            this.#monthIndex = added; // para o caso de o índice exceder 11
+        }
+        
+        return this.#monthIndex;
+    }
+
+    previousMonth(index) {
+        let subtracted = this.#monthIndex - 1;
+        
+        if(subtracted < 0) {
+            this.#monthIndex = 11;
+            this.#year--;
+        }else{
+            this.#monthIndex = subtracted; // para o caso de o índice exceder 11
+        }
+        
+        return this.#monthIndex;
+    }
+
+    getYear(){
+        return this.#year;
     }
 
     getNumberOfDays() {
@@ -31,15 +63,13 @@ class Month {
         pass
     }
 
-    setNextMonth() {
-        pass
-    }
-
-    setPreviousMonth() {
-        pass
-    }
 }
 
+// let mo = new Month(0, 2025)
+
+// for(let i=0 ; i < 24; i++) {
+//     console.log(mo.previousMonth(),mo.getYear())
+// }
 
 class Day {
     #day_number;
@@ -60,8 +90,8 @@ class Day {
         return this.#appointments;
     }
 
-    createAppointment() {
-        pass
+    createAppointment(appointment) {
+        this.#appointments.push(appointment)
     }
 }
 
@@ -107,13 +137,10 @@ class Singer {
 
 
 class Calendar {
-    
+    // implentar verificação de ano bissexto?
     constructor() {
         this.todayDate = new Date();
-        this.presentMonth = new Month(this.todayDate.getMonth());
-        this.nextMonth = (this.presentMonth.getMonthIndex() + 1) % 12;
-        this.previousMonth = this.presentMonth.getMonthIndex() === 0 ? 12 : this.presentMonth.getMonthIndex() - 1;
-        this.presentYear = new Year(this.todayDate.getFullYear());
+        this.month = new Month(this.todayDate.getMonth(), this.todayDate.getFullYear());
         this.months_of_the_year = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
         
     }
@@ -123,28 +150,21 @@ class Calendar {
     }
 
     getPresentMonth() {
-        return this.presentMonth;
+        return this.month.getMonthIndex();
     }
 
-    getNextMonth() {
-        return this.nextMonth;
+    goToNextMonth() {
+        return this.month.nextMonth()
     }
 
-    getPreviousMonth() {
-        return this.previousMonth;
+    goToPreviousMonth() {
+        return this.month.previousMonth()
     } 
 
     getPresentYear() {
-        return this.presentYear;
+        return this.month.getYear();
     }
 
-    setNextMonth() {
-        pass
-    }
-
-    setPreviousMonth() {
-        pass
-    }   
 
     goToDate(date) {
         pass
@@ -159,4 +179,7 @@ class Calendar {
 
 
 let calendar = new Calendar();
-console.log(calendar.nextMonth());
+
+for(let i=0 ; i < 24; i++) {
+    console.log(calendar.goToPreviousMonth(),calendar.getPresentYear())
+}
