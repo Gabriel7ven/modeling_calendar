@@ -134,8 +134,8 @@ class Month {
 
 }
 
-let mo = new Month(0,2026)
-console.log(mo.getWeeks())
+// let mo = new Month(0,2026)
+// console.log(mo.getWeeks())
 
 
 
@@ -181,7 +181,7 @@ class Singer {
 }
 
 
-class Calendar {
+export class Calendar {
     // implentar verificação de ano bissexto?
     #month;
 
@@ -244,10 +244,10 @@ class Calendar {
 
 
 
-let calendar = new Calendar();
-calendar.drawCalendar()
+// let calendar = new Calendar();
+// calendar.drawCalendar()
 
 
-for(let i=0 ; i < 24; i++) {
-    console.log(calendar.goToPreviousMonth(),calendar.getPresentYear())
-}
+// for(let i=0 ; i < 24; i++) {
+//     console.log(calendar.goToPreviousMonth(),calendar.getPresentYear())
+// }
