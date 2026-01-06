@@ -1,0 +1,28 @@
+<%- include("partials/header.ejs") %>
+
+<main>
+    <!-- <h1>Agenda de mensagens musicais</h1> -->
+    <div class="schedule">
+        <div class="nav-schedule">
+            <i id="left-arrow" class="fa-solid fa-arrow-left"></i>
+            <p><span id="month"></span> de <span id="year"></span></p>
+            <i id="right-arrow" class="fa-solid fa-arrow-right"></i>
+        </div>
+        <div class="week-days-labels">
+            <p>Dom</p>
+            <p>Seg</p>
+            <p>Ter</p>
+            <p>Qua</p>
+            <p>Qui</p>
+            <p>Sex</p>
+            <p>Sáb</p>
+        </div>
+        <div id="calendar"></div>
+    </div>
+
+    <div id="posts"></div>
+
+    <div id="container-form"></div>
+</main>
+
+<%- include("partials/footer.ejs") %>
