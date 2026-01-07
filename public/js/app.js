@@ -17,6 +17,10 @@ document.addEventListener("DOMContentLoaded", () => {
         drawPreviousMonth()
     })
 
+
+
+    
+
 })
 
 const month = new Month()
@@ -28,6 +32,7 @@ function drawNextMonth() {
     updateScheduleNavigation()
     drawCalendar();
 }
+
 // Refatorar assim que puder
 function drawPreviousMonth() {
     const weeksContainer = document.getElementById("weeks-container");
@@ -73,12 +78,26 @@ function drawCalendar() {
         div.setAttribute("class","week")
         weeksContainer.appendChild(div)
         for (let j=0; j<weeks[i].length; j++){
-            const dayNumber = (weeks[i][j] && weeks[i][j].getDayNumber());
+            const dayNumber = (weeks[i][j] && weeks[i][j].getDayNumber()); // Pega o número do dia se ele não for nulo
             const divDay = document.createElement("div")
-            divDay.setAttribute("id", `div-day-${dayNumber}`)
+            divDay.setAttribute("id", (dayNumber ? `div-day-${dayNumber}` : null));
             divDay.setAttribute("class","day")
-            if(weeks[i][j]) divDay.innerText = weeks[i][j].getDayNumber()
-                div.appendChild(divDay)
+            if(weeks[i][j]){
+                divDay.innerText = weeks[i][j].getDayNumber()
+                divDay.addEventListener("click", (e) => {
+                    // console.log(
+                        console.log(e.target);
+                        navigator.clipboard
+                                    .writeText("oi")
+                        navigator.clipboard
+                                    .readText()
+                                    .then(
+                                        (clipText) => (alert(clipText)),
+                                    );
+// )
+                })
+            } 
+            div.appendChild(divDay)
         }
     }
 }

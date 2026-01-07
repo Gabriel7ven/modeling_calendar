@@ -1,18 +1,23 @@
 class Day {
     #day_number;
-    #month_name;
+    #month_index;
     #year_number;
     #day_of_week;
     #appointments;
+    #date;
 
-    constructor(day_number, month_name, year_number, day_of_week) {
+    constructor(day_number, month_index, year_number, day_of_week) {
         this.#day_number = day_number;
-        this.#month_name = month_name;
+        this.#month_index = month_index;
         this.#year_number = year_number;
         this.#day_of_week = day_of_week;
         this.#appointments = [];
+        this.#date = new Date(this.#year_number,this.#month_index,this.#day_number)
     }
 
+    getDate() {
+        return this.#date;
+    }
     getAppointments() {
         return this.#appointments;
     }
@@ -115,13 +120,13 @@ export class Month {
             for (let j=0; j<7; j++) {
                 if (i === 0){  // verifica se é a primeira semana
                     if (j >= this.getWeekDayStart()){
-                        weeks[i].push(new Day(counterDays, this.getMonthName(), this.getYear(), j))
+                        weeks[i].push(new Day(counterDays, this.getMonthIndex(), this.getYear(), j))
                         counterDays++;
                     } else {
                         weeks[i].push(null);
                     }
                 } else if (counterDays <= this.getNumberOfDays()) {
-                    weeks[i].push(new Day(counterDays, this.getMonthName(), this.getYear(), j))
+                    weeks[i].push(new Day(counterDays, this.getMonthIndex(), this.getYear(), j))
                     counterDays++;
                 } else {
                     weeks[i].push(null);
