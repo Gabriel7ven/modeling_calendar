@@ -84,7 +84,7 @@ export class Month {
         }else{
             this.#monthIndex = added; // para o caso de o índice exceder 11
         }
-        
+        this.#buildWeeks()
         return this.#monthIndex;
     }
 
@@ -97,7 +97,7 @@ export class Month {
         }else{
             this.#monthIndex = subtracted; // para o caso de o índice exceder 11
         }
-        
+        this.#buildWeeks()
         return this.#monthIndex;
     }
 
@@ -124,7 +124,7 @@ export class Month {
                     weeks[i].push(new Day(counterDays, this.getMonthName(), this.getYear(), j))
                     counterDays++;
                 } else {
-                    break;
+                    weeks[i].push(null);
                 }
 
             }

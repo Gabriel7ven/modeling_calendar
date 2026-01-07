@@ -4,15 +4,43 @@ import Calendar, { Month } from "./calendar.js"
 document.addEventListener("DOMContentLoaded", () => {
     updateScheduleNavigation();
     drawCalendar();
+
+    const rightArrow = document.getElementById("right-arrow");
+    
+    rightArrow.addEventListener("click", () => {
+        drawNextMonth()
+    })
+
+    const leftArrow = document.getElementById("left-arrow");
+
+    leftArrow.addEventListener("click", () => {
+        drawPreviousMonth()
+    })
+
 })
 
 const month = new Month()
+
+function drawNextMonth() {
+    const weeksContainer = document.getElementById("weeks-container");
+    weeksContainer.remove();
+    month.nextMonth()
+    updateScheduleNavigation()
+    drawCalendar();
+}
+// Refatorar assim que puder
+function drawPreviousMonth() {
+    const weeksContainer = document.getElementById("weeks-container");
+    weeksContainer.remove();
+    month.previousMonth()
+    updateScheduleNavigation()
+    drawCalendar();
+}
 
 function updateScheduleNavigation() {
     const navScheduleInfo = document.getElementById("nav-schedule-info");
     navScheduleInfo.innerText = `${month.getMonthName()} de ${month.getYear()}`;
 }
-
 
 function drawCalendar() {
     const divCalendar = document.getElementById("calendar")
@@ -31,7 +59,7 @@ function drawCalendar() {
     divDaysLabels.setAttribute("class","week-days-labels")
     weeksContainer.appendChild(divDaysLabels)
 
-    const daysNames = ["Dom","Seg","Ter","Quar","Qui","Sex","Sáb"];
+    const daysNames = ["Dom","Seg","Ter","Qua","Qui","Sex","Sáb"];
     for (let i=0; i<7; i++) {
         const div = document.createElement("div")
         div.setAttribute("class","day-name");
