@@ -18,18 +18,22 @@ class Day {
     }
 
     addAppointment(appointment) {
-        this.#appointments.push(appointment)
+        this.#appointments.push(appointment);
+    }
+
+    getDayNumber() {
+        return this.#day_number;
     }
 }
 
 
-class Month {
+export class Month {
     #monthIndex;
     #year;
     #days;
     #weeks;
 
-    constructor(monthIndex, year) {
+    constructor(monthIndex=new Date().getMonth(), year=new Date().getFullYear()) {
         this.#monthIndex = monthIndex % 12;
         this.#year = year
         this.#days = [];
@@ -181,7 +185,7 @@ class Singer {
 }
 
 
-export class Calendar {
+export default class Calendar {
     // implentar verificação de ano bissexto?
     #month;
 
