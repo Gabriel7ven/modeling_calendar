@@ -43,7 +43,7 @@ export class Month {
         this.#year = year
         this.#days = [];
         this.#weeks = [];
-        this.months_of_the_year = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        this.months_of_the_year = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
         this.#buildWeeks();
     }
 
@@ -251,12 +251,3 @@ export default class Calendar {
 
 }
 
-
-
-// let calendar = new Calendar();
-// calendar.drawCalendar()
-
-
-// for(let i=0 ; i < 24; i++) {
-//     console.log(calendar.goToPreviousMonth(),calendar.getPresentYear())
-// }

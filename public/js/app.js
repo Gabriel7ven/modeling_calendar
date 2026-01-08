@@ -17,10 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
         drawPreviousMonth()
     })
 
-
-
-    
-
+    document.addEventListener("mousedown", (e) => {
+        hideForm(e.target);
+    })
 })
 
 const month = new Month()
@@ -82,22 +81,79 @@ function drawCalendar() {
             const divDay = document.createElement("div")
             divDay.setAttribute("id", (dayNumber ? `div-day-${dayNumber}` : null));
             divDay.setAttribute("class","day")
+            const date = `${String(dayNumber).padStart(2,"0")}/${String(month.getMonthIndex()+1).padStart(2,"0")}/${month.getYear()}`
+            divDay.setAttribute("ariaDescription",date)
             if(weeks[i][j]){
                 divDay.innerText = weeks[i][j].getDayNumber()
                 divDay.addEventListener("click", (e) => {
                     // console.log(
-                        console.log(e.target);
-                        navigator.clipboard
-                                    .writeText("oi")
-                        navigator.clipboard
-                                    .readText()
-                                    .then(
-                                        (clipText) => (alert(clipText)),
-                                    );
-// )
+                        // console.log(e.target);
+                        // navigator.clipboard
+                        //             .writeText("O SENHOR é o meu pastor; de nada terei falta.")
+                        // navigator.clipboard
+                        //             .readText()
+                        //             .then(
+                        //                 (clipText) => (alert(clipText)),
+                        //             );
+                        const form = document.getElementById("container-form");
+                        form.style.display = "flex";
                 })
             } 
             div.appendChild(divDay)
         }
     }
 }
+
+function hideForm(e) {
+    const form = document.querySelector("#container-form");
+    (e === form) && (form.style.display = "none");
+    console.log(e,form)
+}
+// Form
+
+// function createForm() {
+//     const container = document.getElementById("container-form");
+
+//     const form = document.createElement("form");
+//     form.setAttribute("action","/submit");
+//     form.setAttribute("method","POST");
+
+//     const labelSinger = document.createElement("label")
+//     labelSinger.setAttribute("for","singer");
+//     labelSinger.textContent = "Cantor";
+
+//     const inputSinger = document.createElement("input");
+//     inputSinger.setAttribute("type","text");
+//     inputSinger.setAttribute("id","singer");
+//     inputSinger.setAttribute("name","singer");
+
+//     const labelInviter = document.createElement("label")
+//     labelInviter.setAttribute("for","inviter");
+//     labelInviter.textContent = "Anfitrião";
+
+//     const inputInviter = document.createElement("input");
+//     inputInviter.setAttribute("type","text");
+//     inputInviter.setAttribute("id","inviter");
+//     inputInviter.setAttribute("name","inviter");
+
+
+//     const labelDate = document.createElement("label")
+//     labelDate.setAttribute("for","date");
+//     labelDate.textContent = "Cantor";
+
+//     const inputDate = document.createElement("input"); // formato DD/MM/YYYY
+//     inputDate.setAttribute("type","text");
+//     inputDate.setAttribute("id","date");
+//     inputDate.setAttribute("name","date");
+
+//     container.appendChild(form)
+//     form.appendChild(labelSinger)
+//     form.appendChild(inputSinger)
+//     form.appendChild(labelInviter)
+//     form.appendChild(inputInviter)
+//     form.appendChild(labelDate)
+//     form.appendChild(inputDate)
+
+
+
+// }
