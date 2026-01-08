@@ -97,6 +97,9 @@ function drawCalendar() {
                         //             );
                         const form = document.getElementById("container-form");
                         form.style.display = "flex";
+                        const dateInput = document.getElementById("date");
+                        dateInput.value = date;
+                        dateInput.setAttribute("readonly","readonly")
                 })
             } 
             div.appendChild(divDay)
@@ -107,7 +110,7 @@ function drawCalendar() {
 function hideForm(e) {
     const form = document.querySelector("#container-form");
     (e === form) && (form.style.display = "none");
-    console.log(e,form)
+    // console.log(e,form)
 }
 // Form
 
