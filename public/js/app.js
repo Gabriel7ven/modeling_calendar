@@ -99,7 +99,9 @@ function drawCalendar() {
                         form.style.display = "flex";
                         const dateInput = document.getElementById("date");
                         dateInput.value = date;
+                        dateInput.style.color = "rgb(150, 150, 150)"
                         dateInput.setAttribute("readonly","readonly")
+                        
                 })
             } 
             div.appendChild(divDay)
