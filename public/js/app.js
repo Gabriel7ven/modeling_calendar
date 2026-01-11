@@ -20,7 +20,25 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener("mousedown", (e) => {
         hideForm(e.target);
     })
+
+
+  fetch('http://localhost:3000/users/')
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return response.json();
+  })
+  .then((data) => {
+    console.log('Data fetched:', data);
+  })
+  .catch((error) => {
+    console.error('Fetch error:', error);
+  });
+
 })
+
+
 
 const month = new Month()
 
@@ -48,7 +66,7 @@ function updateScheduleNavigation() {
 
 function drawCalendar() {
     const divCalendar = document.getElementById("calendar")
-        
+
     // const month = new Month()
     const weeks = month.getWeeks()
     
@@ -114,6 +132,12 @@ function hideForm(e) {
     (e === form) && (form.style.display = "none");
     // console.log(e,form)
 }
+
+
+
+
+
+
 // Form
 
 // function createForm() {

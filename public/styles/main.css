@@ -1,3 +1,16 @@
+
+
+:root {
+    --blue-dark: rgb(52, 67, 150);
+    --blue-medium-dark: rgb(78, 89, 175);
+    --blue-medium: rgb(103, 112, 201);
+    --blue-medium-light: rgb(129, 134, 226);
+    --blue-light: rgb(154, 156, 251);
+}
+
+
+
+
 * {
     margin: 0;
     padding: 0;
@@ -6,24 +19,42 @@
 
 #container {
     display: flex;
-    position:fixed;
-    justify-content: center;
-    align-items: center;
+    /* position: fixed; */
+    /* justify-content: center;
+    align-items: center; */
+    /* width: 100%;
+    height: 100vh; */
+    /* background-color: rgb(192, 152, 152); */
+    padding: 20px;
+    height: 100%;
+}
+
+.layout {
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* flex-flow: wrap; */
     width: 100%;
     height: 100vh;
-    background-color: white;
+    /* background-color: aquamarine; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
-.schedule {
+.schedule{
     /* background-color: orange; */
     display: flex;
     gap: 20px;
     flex-direction: column;
     max-width: 800px;
-    height: 500px;
-    flex-grow: 1;
-
+    height: 100%;
+    margin: auto;
+    margin-top: 50px;
 }
 
+main {
+    /* background-color: blue; */
+    flex-grow: 1;
+}
 .nav-schedule {
     display: flex;
     justify-content: center;
@@ -80,9 +111,10 @@
 }
 
 .day-name {
-    background-color: #BDE8F5;
+    background-color: var(--blue-dark);
     border-radius: 2px;
     border: none;
+    color: white;
 }
 .day {
     height: 50px;
@@ -133,3 +165,11 @@ main {
     font-size: 1.5rem;
 }
 
+footer {
+    background-color: rgb(19, 31, 27);
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    height: 50px;
+    color: rgb(255, 255, 255);
+}
