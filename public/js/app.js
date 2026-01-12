@@ -2,42 +2,46 @@ import Calendar, { Month } from "./calendar.js"
 
 // const calendar = new Calendar()
 document.addEventListener("DOMContentLoaded", () => {
+    // Atualiza navegação do calendário e desenha o próprio calendário
     updateScheduleNavigation();
     drawCalendar();
 
+    // Adicionando evento às setas de navegação do calendário
     const rightArrow = document.getElementById("right-arrow");
-    
+    if(!rightArrow) return;
     rightArrow.addEventListener("click", () => {
         drawNextMonth()
     })
-
     const leftArrow = document.getElementById("left-arrow");
-
+    if(!leftArrow) return;
     leftArrow.addEventListener("click", () => {
         drawPreviousMonth()
     })
 
+    // Esconde formulário
     document.addEventListener("mousedown", (e) => {
         hideForm(e.target);
     })
 
+    
 
-  fetch('http://localhost:3000/users/')
-  .then((response) => {
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    return response.json();
-  })
-  .then((data) => {
-    console.log('Data fetched:', data);
-  })
-  .catch((error) => {
-    console.error('Fetch error:', error);
-  });
 
 })
 
+ const users = fetch('http://localhost:3000/users/')
+        .then((response) => {
+            if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then((data) => {
+            console.log('Data fetched:', data);
+            console.log(new Date(data[0].data_atualizacao))
+        })
+        .catch((error) => {
+            console.error('Fetch error:', error);
+        });
 
 
 const month = new Month()
@@ -61,12 +65,13 @@ function drawPreviousMonth() {
 
 function updateScheduleNavigation() {
     const navScheduleInfo = document.getElementById("nav-schedule-info");
+    if (!navScheduleInfo) return;
     navScheduleInfo.innerText = `${month.getMonthName()} de ${month.getYear()}`;
 }
 
 function drawCalendar() {
-    const divCalendar = document.getElementById("calendar")
-
+    const divCalendar = document.getElementById("calendar");
+    if(!divCalendar) return;
     // const month = new Month()
     const weeks = month.getWeeks()
     

@@ -8,13 +8,50 @@ const pool = new Pool({
 })
 
 const getUsers = (request, response) => {
-  pool.query('SELECT * FROM cantores ORDER BY cantor_id ASC', (error, results) => {
+  pool.query('SELECT * FROM cantores ORDER BY nome DESC', (error, results) => {
     if (error) {
       throw error
     }
     response.status(200).json(results.rows)
   })
 }
+
+// Rota para API JSON (mantém a original)
+const getUsersAPI = (request, response) => {
+  pool.query('SELECT * FROM cantores ORDER BY nome DESC', (error, results) => {
+    if (error) {
+      throw error;
+    }
+    response.status(200).json(results.rows);
+  });
+};
+
+// Rota para página HTML
+const getUsersPage = (request, response) => {
+  // Função callback que será executada quando a consulta terminar
+  const handleQueryResult = (erroConsulta, resultadoConsulta) => {
+    if (erroConsulta) {
+      console.error('Erro:', erroConsulta);
+      return response.status(500).render('error', { 
+        message: 'Erro no banco de dados' 
+      });
+    }
+    
+    // 'resultadoConsulta' contém os dados da consulta SQL
+    const dadosCantores = resultadoConsulta.rows;
+    const totalCantores = resultadoConsulta.rowCount;
+    
+    response.render('cantores.ejs', {
+      titulo: 'Lista de Cantores',
+      cantores: dadosCantores,
+      quantidade: totalCantores
+    });
+  };
+  
+  // Executa a consulta e passa a função callback
+  pool.query('SELECT * FROM cantores ORDER BY nome DESC', handleQueryResult);
+};
+
 
 const getUserById = (request, response) => {
   const id = parseInt(request.params.id)
@@ -72,4 +109,6 @@ export  {
   createUser,
   updateUser,
   deleteUser,
+  getUsersAPI,
+  getUsersPage
 }

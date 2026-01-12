@@ -1,0 +1,57 @@
+<%- include("partials/header.ejs") %>
+
+<div class="layout">
+<div id="container">
+    <%- include("partials/lateral_nav") %>
+    <main>
+       <h1><%= titulo %></h1>
+       <table class="table table-striped lista-cantores">
+            <thead>
+                <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Igreja</th>
+                <th scope="col">Celular</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let i = 0; i < cantores.length; i++) { %>
+                    <tr>
+                        <th scope="row"><%= i + 1 %></th>
+                        <td><%= cantores[i].nome %></td>
+                        <td><%= cantores[i].igreja %></td>
+                        <td><%= cantores[i].telefone %></td>
+                    </tr>  
+                <% } %>
+            </tbody>
+        </table>
+    </main>
+</div>
+<div id="container-form">
+    <div>
+        <h1>Novo Participante</h1>
+        <form action="/users" method="POST">
+            <div class="mb-3">
+                <label for="name" class="form-label">Nome:</label>
+                <input type="text" class="form-control" id="name" name="name" aria-describedby="nameHelp" autofocus>
+                <div id="nameHelp" class="form-text">De preferência o nome completo.</div>
+            </div>
+            <div class="mb-3">
+                <label for="cellphone" class="form-label">Celular</label>
+                <input type="number" class="form-control" id="cellphone"  name="cellphone" placeholder="91955554444">
+            </div>
+            <div class="mb-3">
+                <label for="birth_date" class="form-label">Igreja</label>
+                <input type="date" class="form-control" id="birth_date" name="birth_date">
+            </div>
+            <div class="mb-3">
+                <label for="church" class="form-label">Igreja</label>
+                <input type="text" class="form-control" id="church" name="church" placeholder="Ex.: B. Bentes 1" >
+            </div>
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary">Adicionar Participante</button>
+            </div>
+        </form>
+    </div>
+</div>
+<%- include("partials/footer.ejs") %>

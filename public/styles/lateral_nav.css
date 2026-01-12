@@ -21,9 +21,8 @@
     padding: 20px;
 }
 
-li {
-    border-top: 1px solid var(--blue-light) !important;
-}
+
+
 li:hover {
     background-color: var(--blue-medium);
 }

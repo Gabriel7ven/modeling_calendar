@@ -1,0 +1,55 @@
+<%- include("partials/header.ejs") %>
+
+<div class="layout">
+<div id="container">
+<%- include("partials/lateral_nav") %>
+    <main>
+        <!-- <h1>Agenda de mensagens musicais</h1> -->
+        <div>
+            <div class="schedule">
+                <div class="nav-schedule">
+                    <div>
+                        <button class="btn btn-primary" id="left-arrow"><i class="fa-solid fa-arrow-left"></i></button>
+                        <p id="nav-schedule-info"></p>
+                        <button class="btn btn-primary" id="right-arrow"><i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                </div>
+                <div id="calendar"></div>
+            </div>  
+            
+            <!-- <div id="posts"></div> -->
+            
+        </div>
+        
+    </main>
+</div>
+<div id="container-form">
+    <div>
+        <h1>Novo Compromisso</h1>
+        <form action="/users" method="POST">
+            <div class="mb-3">
+                <label for="name" class="form-label">Convidado</label>
+                <input type="text" class="form-control" id="name" name="name" aria-describedby="nameHelp" autofocus>
+                <div id="nameHelp" class="form-text">De preferência o nome completo.</div>
+            </div>
+            <div class="mb-3">
+                <label for="host" class="form-label">Anfitrião</label>
+                <input type="text" class="form-control" id="host" aria-describedby="hostHelp">
+                <div id="hostHelp" class="form-text">O nome da pessoa que convidou.</div>
+            </div>
+            <div class="mb-3">
+                <label for="church" class="form-label">Igreja</label>
+                <input type="text" class="form-control" id="church" name=church aria-describedby="churchHelp">
+                <div id="churchHelp" class="form-text">Ex.: Marco I</div>
+            </div>
+            <div class="mb-3">
+                <label for="date" class="form-label">Data</label>
+                <input type="text" class="form-control" id="date" name="">
+            </div>
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary">Adicionar</button>
+            </div>
+        </form>
+    </div>
+</div>
+<%- include("partials/footer.ejs") %>
