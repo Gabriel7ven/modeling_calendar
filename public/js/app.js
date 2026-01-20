@@ -2,9 +2,29 @@ import Calendar, { Month } from "./calendar.js"
 
 // const calendar = new Calendar()
 document.addEventListener("DOMContentLoaded", () => {
+    const month = new Month()
+    const users = fetch('http://localhost:3000/appointments/')
+            .then((response) => {
+                if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then((data) => {
+                console.log('Data fetched:', data);
+                updateScheduleNavigation();
+                drawCalendar(data);
+                data = data
+            })
+            .catch((error) => {
+                console.error('Fetch error:', error);
+            });
+
+                // updateScheduleNavigation();
+                // drawCalendar();
+
     // Atualiza navegação do calendário e desenha o próprio calendário
-    updateScheduleNavigation();
-    drawCalendar();
+    
 
     // Adicionando evento às setas de navegação do calendário
     const rightArrow = document.getElementById("right-arrow");
@@ -26,32 +46,36 @@ document.addEventListener("DOMContentLoaded", () => {
     
 
 
-})
-
- const users = fetch('http://localhost:3000/users/')
-        .then((response) => {
-            if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then((data) => {
-            console.log('Data fetched:', data);
-            console.log(new Date(data[0].data_atualizacao))
-        })
-        .catch((error) => {
-            console.error('Fetch error:', error);
-        });
 
 
-const month = new Month()
+    //-----------------------------------------------------------------
+function changeCalendar(drawFunction) {
+       const users = fetch('http://localhost:3000/appointments/')
+               .then((response) => {
+                   if (!response.ok) {
+                   throw new Error(`HTTP error! Status: ${response.status}`);
+                   }
+                   return response.json();
+               })
+               .then((data) => {
+                   console.log('Data fetched:', data);
+                   updateScheduleNavigation();
+                   drawFunction(data);
+               })
+               .catch((error) => {
+                   console.error('Fetch error:', error);
+               });
+}
+
+
 
 function drawNextMonth() {
     const weeksContainer = document.getElementById("weeks-container");
     weeksContainer.remove();
     month.nextMonth()
-    updateScheduleNavigation()
-    drawCalendar();
+    // updateScheduleNavigation()
+    // drawCalendar(data);
+    changeCalendar(drawCalendar)
 }
 
 // Refatorar assim que puder
@@ -59,8 +83,9 @@ function drawPreviousMonth() {
     const weeksContainer = document.getElementById("weeks-container");
     weeksContainer.remove();
     month.previousMonth()
-    updateScheduleNavigation()
-    drawCalendar();
+    // updateScheduleNavigation()
+    // drawCalendar(data);
+    changeCalendar(drawCalendar)
 }
 
 function updateScheduleNavigation() {
@@ -69,7 +94,7 @@ function updateScheduleNavigation() {
     navScheduleInfo.innerText = `${month.getMonthName()} de ${month.getYear()}`;
 }
 
-function drawCalendar() {
+function drawCalendar(data=null) {
     const divCalendar = document.getElementById("calendar");
     if(!divCalendar) return;
     // const month = new Month()
@@ -104,8 +129,14 @@ function drawCalendar() {
             const divDay = document.createElement("div")
             divDay.setAttribute("id", (dayNumber ? `div-day-${dayNumber}` : null));
             divDay.setAttribute("class","day")
-            const date = `${String(dayNumber).padStart(2,"0")}/${String(month.getMonthIndex()+1).padStart(2,"0")}/${month.getYear()}`
-            divDay.setAttribute("ariaDescription",date)
+
+            const date = `${month.getYear()}-${String(month.getMonthIndex()+1)}-${String(dayNumber)}` // Data do dia selecionado no calendário
+            if (procurarCompromissos(date,data).length > 0) {
+                divDay.classList.add("day-with-appointments");
+            }
+            // console.log(date)
+            
+            divDay.setAttribute("ariaDescription",date);
             if(weeks[i][j]){
                 divDay.innerText = weeks[i][j].getDayNumber()
                 divDay.addEventListener("click", (e) => {
@@ -120,8 +151,12 @@ function drawCalendar() {
                         //             );
                         const form = document.getElementById("container-form");
                         form.style.display = "flex";
+
                         const dateInput = document.getElementById("date");
                         dateInput.value = date;
+                        // console.log(new Date(date))
+                        
+
                         dateInput.style.color = "rgb(150, 150, 150)"
                         dateInput.setAttribute("readonly","readonly")
                         
@@ -132,11 +167,52 @@ function drawCalendar() {
     }
 }
 
+function procurarCompromissos(data, dados) {
+    const compromissosDoDia = [];
+    // if (!dados) return compromissosDoDia;
+    if (!dados) return compromissosDoDia;
+    dados.forEach((compromisso) => {
+        console.log(compromisso);
+        const dataCompromisso = new Date(compromisso.data_compromisso);
+        const dataFormatada = `${dataCompromisso.getFullYear()}-${String(dataCompromisso.getMonth()+1)}-${String(dataCompromisso.getDate())}`;
+        if (data === dataFormatada) {
+            compromissosDoDia.push(compromisso);
+        }
+    });
+    return compromissosDoDia;
+}
+
+
 function hideForm(e) {
     const form = document.querySelector("#container-form");
     (e === form) && (form.style.display = "none");
     // console.log(e,form)
 }
+
+
+})
+
+// let dados = null;
+
+// const users = fetch('http://localhost:3000/users/')
+//         .then((response) => {
+//             if (!response.ok) {
+//             throw new Error(`HTTP error! Status: ${response.status}`);
+//             }
+//             return response.json();
+//         })
+//         .then((data) => {
+//             console.log('Data fetched:', data);
+//             console.log(new Date(data[0].data_atualizacao))
+//             dados = data;
+//             // alert('Dados carregados com sucesso!');
+//         })
+//         .catch((error) => {
+//             console.error('Fetch error:', error);
+//         });
+
+
+
 
 
 

@@ -4,7 +4,7 @@
 <div id="container">
 <%- include("partials/lateral_nav") %>
     <main>
-        <!-- <h1>Agenda de mensagens musicais</h1> -->
+
         <div>
             <div class="schedule">
                 <div class="nav-schedule">
@@ -17,8 +17,6 @@
                 <div id="calendar"></div>
             </div>  
             
-            <!-- <div id="posts"></div> -->
-            
         </div>
         
     </main>
@@ -26,7 +24,8 @@
 <div id="container-form">
     <div>
         <h1>Novo Compromisso</h1>
-        <form action="/users" method="POST">
+        <!-- <form action="/users" method="POST"> -->
+        <form action="/appointments" method="POST">
             <div class="mb-3">
                 <label for="name" class="form-label">Convidado</label>
                 <input type="text" class="form-control" id="name" name="name" aria-describedby="nameHelp" autofocus>
@@ -34,7 +33,7 @@
             </div>
             <div class="mb-3">
                 <label for="host" class="form-label">Anfitrião</label>
-                <input type="text" class="form-control" id="host" aria-describedby="hostHelp">
+                <input type="text" class="form-control" id="host" name="host" aria-describedby="hostHelp">
                 <div id="hostHelp" class="form-text">O nome da pessoa que convidou.</div>
             </div>
             <div class="mb-3">
@@ -44,10 +43,11 @@
             </div>
             <div class="mb-3">
                 <label for="date" class="form-label">Data</label>
-                <input type="text" class="form-control" id="date" name="">
+                <input type="text" class="form-control" id="date" name="date">
             </div>
             <div class="d-grid gap-2">
-                <button type="submit" class="btn btn-primary">Adicionar</button>
+                <!-- <button type="submit" class="btn btn-primary">Adicionar</button> -->
+                <button type="submit" value="Adicionar" class="btn btn-primary">Adicionar
             </div>
         </form>
     </div>

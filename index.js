@@ -1,6 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
-import { getUsers, getUserById, createUser, updateUser, deleteUser, getUsersAPI, getUsersPage } from './queries.js';
+import { getUsers, getUserById, createUser, updateUser, deleteUser, getUsersAPI, getUsersPage, getAppointment, createAppointment } from './queries.js';
 
 
 
@@ -25,6 +25,8 @@ app.get('/users', getUsers)
 app.get('/users/:id', getUserById)
 app.get('/cantores', getUsersPage)
 app.post('/users', createUser)
+app.get('/appointments', getAppointment)
+app.post('/appointments', createAppointment)
 app.put('/users/:id', updateUser)
 app.delete('/users/:id', deleteUser)
 

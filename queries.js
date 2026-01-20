@@ -72,7 +72,21 @@ const createUser = (request, response) => {
     if (error) {
       throw error
     }
-    response.status(201).send(`User ${name} added with sucess!`)
+    // response.status(201).send(`User ${name} added with sucess!`)
+    response.redirect('/agenda');
+  })
+}
+
+const creatSinger = (request, response) => {
+  console.log(request.body);
+  const { name, church,  } = request.body
+  
+  pool.query('INSERT INTO cantores (nome, telefone, data_nascimento, igreja) VALUES ($1, $2, $3, $4)', [name, church], (error, results) => {
+    if (error) {
+      throw error
+    }
+    // response.status(201).send(`User ${name} added with sucess!`)
+    response.redirect('/agenda');
   })
 }
 
@@ -103,6 +117,27 @@ const deleteUser = (request, response) => {
   })
 }
 
+
+const getAppointment = (request, response) => {
+  pool.query('SELECT * FROM compromissos ORDER BY data_compromisso DESC', (error, results) => {
+    if (error) {
+      throw error;
+    }
+    response.status(200).json(results.rows);
+  });
+}
+
+const createAppointment = (request, response) => {
+  console.log(request.body);
+  const { name, host, church, date } = request.body;
+  pool.query('INSERT INTO compromissos (nome, anfitriao, igreja, data_compromisso) VALUES ($1, $2, $3, $4)', [name, host, church, date], (error, results) => {
+    if (error) {
+      throw error;
+    }
+    response.redirect('/agenda');
+  });
+}
+
 export  {
   getUsers,
   getUserById,
@@ -110,5 +145,7 @@ export  {
   updateUser,
   deleteUser,
   getUsersAPI,
-  getUsersPage
+  getUsersPage,
+  getAppointment,
+  createAppointment
 }

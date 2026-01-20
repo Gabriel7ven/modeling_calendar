@@ -177,3 +177,27 @@ footer {
     color: rgb(255, 255, 255);
 }
 
+.cantores-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    /* background-color: bisque; */
+}
+.cantores {
+    width: 800px;
+    /* background-color: aqua; */
+}
+
+tr {
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+tr:hover {
+    transform: scale(1.05);
+}
+
+.day-with-appointments {
+    background-color: lightgreen;
+}
