@@ -18,13 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
             })
             .catch((error) => {
                 console.error('Fetch error:', error);
-            });
-
-                // updateScheduleNavigation();
-                // drawCalendar();
-
-    // Atualiza navegação do calendário e desenha o próprio calendário
-    
+            });    
 
     // Adicionando evento às setas de navegação do calendário
     const rightArrow = document.getElementById("right-arrow");
