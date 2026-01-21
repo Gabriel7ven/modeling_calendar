@@ -1,11 +1,39 @@
-import { Pool } from 'pg'
-const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'api',//'postgres',
-  password: 'Mcz163285!bELEM',
-  port: 5432,
-})
+import { Pool } from 'pg';
+import 'dotenv/config';
+
+// const pool = new Pool({
+//   user: 'postgres',
+//   host: 'localhost',
+//   database: 'api',//'postgres',
+//   password: 'Mcz163285!bELEM',
+//   port: 5432,
+// })
+
+const isProduction = process.env.NODE_ENV === 'production';
+
+let poolConfig;
+
+if (isProduction) {
+  // Produção: usa DATABASE_URL com SSL
+  poolConfig = {
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+      rejectUnauthorized: false,
+    },
+  };
+} else {
+  // Desenvolvimento local: conexão direta sem SSL
+  poolConfig = {
+    user: process.env.DB_USER,
+    host: process.env.DB_HOST,
+    database: process.env.DB_NAME,
+    password: process.env.DB_PASSWORD,
+    port: process.env.DB_PORT,
+    ssl: false, // Explicitamente desabilita SSL localmente
+  };
+}
+
+const pool = new Pool(poolConfig);
 
 const getUsers = (request, response) => {
   pool.query('SELECT * FROM cantores ORDER BY nome DESC', (error, results) => {
