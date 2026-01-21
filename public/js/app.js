@@ -123,6 +123,9 @@ function drawCalendar(data=null) {
             const divDay = document.createElement("div")
             divDay.setAttribute("id", (dayNumber ? `div-day-${dayNumber}` : null));
             divDay.setAttribute("class","day")
+            if(!weeks[i][j]){
+                divDay.style.visibility = "hidden";
+            }
 
             const date = `${month.getYear()}-${String(month.getMonthIndex()+1)}-${String(dayNumber)}` // Data do dia selecionado no calendário
             if (procurarCompromissos(date,data).length > 0) {
