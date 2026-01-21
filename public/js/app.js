@@ -3,7 +3,7 @@ import Calendar, { Month } from "./calendar.js"
 // const calendar = new Calendar()
 document.addEventListener("DOMContentLoaded", () => {
     const month = new Month()
-    const users = fetch('http://localhost:3000/appointments/')
+    const users = fetch('http://modeling-calendar.onrender.com/appointments/')
             .then((response) => {
                 if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //-----------------------------------------------------------------
 function changeCalendar(drawFunction) {
-       const users = fetch('http://localhost:3000/appointments/')
+       const users = fetch('http://modeling-calendar.onrender.com/appointments/')
                .then((response) => {
                    if (!response.ok) {
                    throw new Error(`HTTP error! Status: ${response.status}`);
@@ -188,7 +188,7 @@ function hideForm(e) {
 
 // let dados = null;
 
-// const users = fetch('http://localhost:3000/users/')
+// const users = fetch('http://modeling-calendar.onrender.com/users/')
 //         .then((response) => {
 //             if (!response.ok) {
 //             throw new Error(`HTTP error! Status: ${response.status}`);
