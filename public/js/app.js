@@ -3,7 +3,7 @@ import Calendar, { Month } from "./calendar.js"
 // const calendar = new Calendar()
 document.addEventListener("DOMContentLoaded", () => {
     const month = new Month()
-    const users = fetch('https://modeling-calendar.vercel.app/appointments/')
+    const users = fetch('http://modeling-calendar.vercel.app/appointments/')
             .then((response) => {
                 if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //-----------------------------------------------------------------
 function changeCalendar(drawFunction) {
-       const users = fetch('https://modeling-calendar.vercel.app/appointments/')
+       const users = fetch('http://modeling-calendar.vercel.app/appointments/')
                .then((response) => {
                    if (!response.ok) {
                    throw new Error(`HTTP error! Status: ${response.status}`);
